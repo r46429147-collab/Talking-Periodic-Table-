@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "الجدول الدوري الناطق"
+description = "موسوعة كيميائية تفاعلية باللغة العربية تعرض العناصر الـ118 بمعلوماتها العلمية، قصص اكتشافها، وصوت تعريفي لكل عنصر."
+version = "1.0.0"
+id = "artifacts/talking-periodic-table"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21267
+
+[services.development]
+run = "pnpm --filter @workspace/talking-periodic-table run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/talking-periodic-table", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/talking-periodic-table/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21267"
+BASE_PATH = "/"
