@@ -11,7 +11,7 @@ export function Shell({ children }: { children: ReactNode }) {
           <Link href="/" data-testid="link-home" aria-label="العودة إلى الجدول الدوري" className="flex items-center gap-3 text-inherit no-underline">
             <span className="flex h-10 w-10 items-center justify-center border border-[#bfa56e]/60 text-[#d9bd82]"><Atom size={23} strokeWidth={1.4} /></span>
             <span>
-              <span className="block display-font text-lg leading-tight md:text-xl">العناصر تتحدث</span>
+               <span className="block display-font text-lg leading-tight md:text-xl">الجدول الدوري الناطق</span>
               <span className="mt-1 block text-[9px] tracking-[.18em] text-[#c7c4b8]">موسوعة الكيمياء العربية</span>
             </span>
           </Link>

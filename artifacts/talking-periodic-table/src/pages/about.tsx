@@ -9,7 +9,7 @@ export default function AboutPage() {
         <div>
           <div className="eyebrow mb-3">عن المشروع · منهجنا</div>
           <h1 className="display-font text-4xl leading-tight text-[#26373a] md:text-6xl">العلم أوضح،<br /><span className="text-[#8e7140]">حين يتكلم بلغتك.</span></h1>
-          <p className="mt-5 max-w-2xl text-sm leading-8 text-[#596663] md:text-base">«العناصر تتحدث» موسوعة تعليمية تفاعلية باللغة العربية، تساعد طلاب الكيمياء على استكشاف العناصر وفهم ما نعرفه عنها — وما لا نعرفه بعد.</p>
+          <p className="mt-5 max-w-2xl text-sm leading-8 text-[#596663] md:text-base">«الجدول الدوري الناطق» موسوعة تعليمية تفاعلية باللغة العربية، تساعد طلاب الكيمياء على استكشاف العناصر وفهم ما نعرفه عنها — وما لا نعرفه بعد.</p>
         </div>
         <div className="flex items-center gap-4 border-r-2 border-[#a88a53] bg-[#e8e3d7] p-5">
           <span className="display-font text-5xl text-[#a88a53]">١١٨</span>

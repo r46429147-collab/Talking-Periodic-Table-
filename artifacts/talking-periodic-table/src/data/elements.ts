@@ -1,60 +1,63 @@
+import { atomicModelData, type AtomicModelRecord } from './atomic-model-data';
+
 // Curated static reference data for the 118 named elements.
 // Atomic properties: PubChem periodic table; narratives, discovery dates and name origins: Royal Society of Chemistry (RSC).
 export type CategoryKey = 'alkali-metal' | 'alkaline-earth-metal' | 'transition-metal' | 'post-transition-metal' | 'metalloid' | 'nonmetal' | 'halogen' | 'noble-gas' | 'lanthanide' | 'actinide';
-export type ElementRecord = { number:number; symbol:string; nameAr:string; nameEn:string; mass:string; group:number|null; period:number; category:CategoryKey; phase:string; radioactive:boolean; summaryAr:string; propertiesAr:string[]; usesAr:string[]; occurrenceAr:string; imageUrl:string|null; imageCredit:string; discoverer:string|null; discoveryYear:string|null; discoveryPlace:string|null; storyAr:string|null; nameOriginAr:string|null; halfLife:string|null; radiationType:string|null; sources:{label:string;url:string}[] };
+type BaseElementRecord = { number:number; symbol:string; nameAr:string; nameEn:string; mass:string; group:number|null; period:number; category:CategoryKey; phase:string; radioactive:boolean; summaryAr:string; propertiesAr:string[]; usesAr:string[]; occurrenceAr:string; imageUrl:string|null; imageCredit:string; discoverer:string|null; discoveryYear:string|null; discoveryPlace:string|null; storyAr:string|null; nameOriginAr:string|null; halfLife:string|null; radiationType:string|null; sources:{label:string;url:string}[] };
+export type ElementRecord = BaseElementRecord & AtomicModelRecord;
 export const categories: {key:CategoryKey;labelAr:string;color:string}[] = [
   {
     "key": "alkali-metal",
     "labelAr": "الفلزات القلوية",
-    "color": "#ead3a3"
+    "color": "#ff9b68"
   },
   {
     "key": "alkaline-earth-metal",
     "labelAr": "الفلزات القلوية الترابية",
-    "color": "#dfc6a0"
+    "color": "#f6c66b"
   },
   {
     "key": "transition-metal",
     "labelAr": "الفلزات الانتقالية",
-    "color": "#c7d7ca"
+    "color": "#5bd4ce"
   },
   {
     "key": "post-transition-metal",
     "labelAr": "الفلزات بعد الانتقالية",
-    "color": "#c6d7d8"
+    "color": "#78a9ff"
   },
   {
     "key": "metalloid",
     "labelAr": "أشباه الفلزات",
-    "color": "#e2c6a8"
+    "color": "#c39aff"
   },
   {
     "key": "nonmetal",
     "labelAr": "اللافلزات",
-    "color": "#d4dfb9"
+    "color": "#67d8a2"
   },
   {
     "key": "halogen",
     "labelAr": "الهالوجينات",
-    "color": "#e7c6ad"
+    "color": "#f27ab5"
   },
   {
     "key": "noble-gas",
     "labelAr": "الغازات النبيلة",
-    "color": "#d5c8df"
+    "color": "#78caff"
   },
   {
     "key": "lanthanide",
     "labelAr": "اللانثانيدات",
-    "color": "#e9c4c0"
+    "color": "#f187aa"
   },
   {
     "key": "actinide",
     "labelAr": "الأكتينيدات",
-    "color": "#d9c6cf"
+    "color": "#c48cff"
   }
 ];
-export const elements: ElementRecord[] = [
+const elementSource: BaseElementRecord[] = [
   {
     "number": 1,
     "symbol": "H",
@@ -5278,3 +5281,9 @@ export const elements: ElementRecord[] = [
     ]
   }
 ];
+
+export const elements: ElementRecord[] = elementSource.map((element) => {
+  const atomicData = atomicModelData[element.number];
+  if (!atomicData) throw new Error(`Missing atomic model data for element ${element.number}`);
+  return { ...element, ...atomicData };
+});

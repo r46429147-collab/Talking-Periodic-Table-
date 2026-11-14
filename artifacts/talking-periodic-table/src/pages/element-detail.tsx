@@ -3,6 +3,7 @@ import { Link, useParams } from 'wouter';
 import { ArrowRight, AudioLines, Atom, ChevronLeft, Copy, ExternalLink, ImageOff, MessageCircle, Radiation, Share2 } from 'lucide-react';
 import { elements, categories, type ElementRecord } from '@/data/elements';
 import { onElementVoiceClick, stopElementVoice } from '@/lib/element-voice-adapter';
+import { BohrAtomModel } from '@/components/bohr-atom-model';
 
 const unavailable = 'غير متاح في البيانات الحالية';
 const notConfirmed = 'غير مؤكد';
@@ -75,7 +76,7 @@ export default function ElementPage() {
   const share = async () => {
     const url = window.location.href;
     try {
-      if (navigator.share) await navigator.share({ title: `${element.nameAr} (${element.symbol}) — العناصر تتحدث`, text: shareText, url });
+      if (navigator.share) await navigator.share({ title: `${element.nameAr} (${element.symbol}) — الجدول الدوري الناطق`, text: shareText, url });
       else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(shareText);
         setShareMessage('نُسخت معلومات العنصر إلى الحافظة.');
@@ -130,7 +131,7 @@ export default function ElementPage() {
           {element.number >= 104 && <div className="mt-4 border-r-2 border-[#a88a53] bg-[#eee8d9] px-4 py-3 text-xs leading-6 text-[#596663]" role="note" data-testid={`notice-predicted-${element.number}`}>عنصر فائق الثقل صُنّع في المختبر. لا تتوفر عينة مرئية؛ كثير من خواصه وتصنيفه الكيميائي مستنتج نظريًا.</div>}
           <div className="mt-7 flex flex-wrap gap-2">
             <button type="button" onClick={requestVoice} data-testid="button-speak" aria-label={voiceActive ? `أوقف صوت عنصر ${element.nameAr}` : `استمع إلى تعريف ${element.nameAr}`} aria-pressed={voiceActive} aria-describedby="voice-status"
-              className="inline-flex items-center gap-2 bg-[#315d52] px-4 py-3 text-sm text-[#f7f3e9] transition hover:bg-[#25483f] disabled:cursor-not-allowed disabled:bg-[#747e78] disabled:text-[#ece9df]">
+               className={`inline-flex items-center gap-2 bg-[#315d52] px-4 py-3 text-sm text-[#f7f3e9] transition hover:bg-[#25483f] disabled:cursor-not-allowed disabled:bg-[#747e78] disabled:text-[#ece9df] ${voiceActive ? 'element-voice-active' : ''}`}>
               <AudioLines size={17} />{voiceActive ? 'أوقف الصوت' : 'استمع إليّ — أنا العنصر'}
             </button>
             <button type="button" onClick={share} data-testid="button-share-element" aria-label={`مشاركة معلومات ${element.nameAr}`} className="inline-flex items-center gap-2 border border-[#c9c1b1] px-4 py-3 text-sm text-[#3e5050] transition hover:border-[#315d52]"><Share2 size={16} />مشاركة المعلومات</button>
@@ -151,6 +152,8 @@ export default function ElementPage() {
           </figcaption>
         </figure>
       </section>
+
+      <BohrAtomModel element={element} />
 
       <section className="mt-7 grid gap-6 lg:grid-cols-[.8fr_1.2fr]">
         <div className="border border-[#d6cebf] bg-[#f8f5ed] p-5 md:p-7">

@@ -1,20 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { Link } from 'wouter';
 import { Search, X, ArrowDownLeft, FlaskConical, Layers3 } from 'lucide-react';
 import { categories, elements, type CategoryKey, type ElementRecord } from '@/data/elements';
 
-const colors: Record<CategoryKey, string> = {
-  'alkali-metal': '#ead3a3',
-  'alkaline-earth-metal': '#dfc6a0',
-  'transition-metal': '#c7d7ca',
-  'post-transition-metal': '#c6d7d8',
-  metalloid: '#e2c6a8',
-  nonmetal: '#d4dfb9',
-  halogen: '#e7c6ad',
-  'noble-gas': '#d5c8df',
-  lanthanide: '#e9c4c0',
-  actinide: '#d9c6cf',
-};
+const colors = Object.fromEntries(categories.map((item) => [item.key, item.color])) as Record<CategoryKey, string>;
 
 function tilePosition(element: ElementRecord) {
   if (element.category === 'lanthanide') return { gridColumn: element.number - 56, gridRow: 1 };
@@ -27,7 +16,7 @@ function ElementTile({ element, series = false }: { element: ElementRecord; seri
     <Link href={`/element/${element.number}`} data-testid={`tile-element-${element.number}`}
       aria-label={`${element.number}: ${element.nameAr}، ${element.symbol}، الكتلة الذرية ${element.mass}`}
       className="element-tile group text-[#26373a] no-underline"
-      style={{ backgroundColor: colors[element.category], ...(series ? {} : tilePosition(element)) }}>
+      style={{ '--tile-color': colors[element.category], ...(series ? {} : tilePosition(element)) } as CSSProperties}>
       <span className="tile-number block text-left">{element.number}</span>
       <span className="tile-symbol block" dir="ltr">{element.symbol}</span>
       <span className="tile-name block">{element.nameAr}</span>
