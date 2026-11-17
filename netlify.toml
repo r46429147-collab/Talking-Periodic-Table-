@@ -1,0 +1,13 @@
+[build]
+base = "."
+command = "pnpm --filter @workspace/talking-periodic-table run build"
+publish = "artifacts/talking-periodic-table/dist/public"
+
+[build.environment]
+BASE_PATH = "/"
+PORT = "5173"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
