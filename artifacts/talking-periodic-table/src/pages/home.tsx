@@ -1,4 +1,5 @@
-import { useMemo, useState, type CSSProperties } from 'react';
+Name="tile-name block">{element.nameAr}</span>
+      <span cimport { useMemo, useState, type CSSProperties } from 'react';
 import { Link } from 'wouter';
 import { Search, X, ArrowDownLeft, FlaskConical, Layers3 } from 'lucide-react';
 import { categories, elements, type CategoryKey, type ElementRecord } from '@/data/elements';
@@ -19,7 +20,6 @@ function ElementTile({ element, series = false }: { element: ElementRecord; seri
       style={{ '--tile-color': colors[element.category], ...(series ? {} : tilePosition(element)) } as CSSProperties}>
       <span className="tile-number block text-left">{element.number}</span>
       <span className="tile-symbol block" dir="ltr">{element.symbol}</span>
-      <span className="tile-name block">{element.nameAr}</span>
       <span className="tile-mass block text-left" dir="ltr">{element.mass}</span>
     </Link>
   );
@@ -55,6 +55,9 @@ export default function HomePage() {
             <p className="mt-5 max-w-xl text-sm leading-8 text-[#586568] md:text-base">
               استكشف العناصر الـ١١٨، من أبسط الذرات إلى أثقلها. معرفة علمية موثّقة، بصوت عربي يعرّفك بنفسه.
             </p>
+            <p className="mt-4 max-w-xl text-sm leading-8 text-[#586568] md:text-base">
+  الجدول الدوري الناطق هو موسوعة كيميائية عربية تفاعلية تضم العناصر الكيميائية الـ118، وتتيح استكشاف خصائص كل عنصر ومعلوماته ومصادر وجوده، مع إمكانية الاستماع إلى تعريف صوتي باللغة العربية. يهدف الموقع إلى تقديم الكيمياء بطريقة تعليمية مبسطة وتفاعلية، تجمع بين المعرفة العلمية والتجربة الصوتية.
+</p>
           </div>
           <div className="grid grid-cols-3 border-y border-[#c9c1b1] py-4 text-center md:pb-1">
             <div className="border-l border-[#c9c1b1]"><div className="display-font text-3xl text-[#25363b]">١١٨</div><div className="mt-1 text-[11px] text-[#687273]">عنصرًا موثقًا</div></div>
@@ -68,7 +71,8 @@ export default function HomePage() {
           <div>
             <div className="eyebrow mb-2">قاعة العناصر</div>
             <h2 id="table-title" className="display-font text-3xl text-[#26373a]">الجدول الدوري</h2>
-            <p className="mt-1 text-xs text-[#758080]">اختر أي بطاقة لفتح ملف العنصر الكامل.</p>
+            <p className="mt-1 text-xs text-[#758080]">اختر أي بطاقة لفتح ملف العنصر الكامل.
+            </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <label className="relative block min-w-[230px] flex-1 md:flex-none">
