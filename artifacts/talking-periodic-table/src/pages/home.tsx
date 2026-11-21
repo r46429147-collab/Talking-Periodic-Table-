@@ -1,5 +1,4 @@
-Name="tile-name block">{element.nameAr}</span>
-      <span cimport { useMemo, useState, type CSSProperties } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { Link } from 'wouter';
 import { Search, X, ArrowDownLeft, FlaskConical, Layers3 } from 'lucide-react';
 import { categories, elements, type CategoryKey, type ElementRecord } from '@/data/elements';
